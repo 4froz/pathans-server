@@ -7,6 +7,8 @@ import { Server, Socket } from "socket.io";
 import connectDb from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoute from "./routes/productRoute.js";
+import orderRoute from "./routes/orderRoute.js";
+import paymentRoute from "./routes/paymentRoutes.js";
 import cors from "cors";
 dotenv.config();
 
@@ -14,18 +16,8 @@ const app = express();
 app.use(bodyParser.json());
 const httpServer = createServer(app);
 
-const io = new Server(httpServer, {
-  cors: {
-    origin: "*", // Allow access from all origins
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  },
-});
+app.use(cors());
 
-
-app.use(cors({
-  origin: "*", // Allows all origins
-  methods: ["GET", "POST", "PUT", "DELETE"],
-}));
 connectDb();
 app.get("/", (req, res) => {
   res.send("Api is Running");
@@ -33,12 +25,11 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoute);
+app.use("/api/orders", orderRoute);
+app.use("/api/payment", paymentRoute);
 
 const PORT = process.env.PORT || 5000;
 
-
-
-
-httpServer.listen(5000, '0.0.0.0', () => {
+app.listen(8080, "0.0.0.0", () => {
   console.log("Server is running on port 3000");
 });
