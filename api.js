@@ -4,11 +4,11 @@ import path from "path";
 import bodyParser from "body-parser";
 import { createServer } from "http";
 import { Server, Socket } from "socket.io";
-import connectDb from "./config/db.js";
-import userRoutes from "./routes/userRoutes.js";
-import productRoute from "./routes/productRoute.js";
-import orderRoute from "./routes/orderRoute.js";
-import paymentRoute from "./routes/paymentRoutes.js";
+import connectDb from "./functions/config/db.js";
+import userRoutes from "./functions/routes/userRoutes.js";
+import productRoute from "./functions/routes/productRoute.js";
+import orderRoute from "./functions/routes/orderRoute.js";
+import paymentRoute from "./functions/routes/paymentRoutes.js";
 import cors from "cors";
 dotenv.config();
 
